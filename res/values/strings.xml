@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PokePro</string>
+    <string name="poke_alert">You just got poked fool!</string>
+    <string name="is_active">Service is currently active.</string>
+    <string name="is_not_active">Service is not currently active.</string>
+    <string name="notification_settings">Notifications</string><string name="enable_notifications_title">Enable Notifications</string><string name="settings_menu">Settings</string>
+    
+    
+    <string name="enable_notifications_summary_off">Poke notifications are not enabled</string><string name="enable_notifications_summary_on">Poke notifications are enabled</string>
+    
+    <string name="enable_intrusive_notifications">Intrusive Notifications</string>
+    <string name="intrusive_summary_on">Intrusive notifications (status bar) will be used</string>
+    <string name="intrusive_summary_off">Non intrusive (toast) notifications will be used</string>
+
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <PreferenceCategory 
+        android:title="@string/notification_settings" >
+
+        	<CheckBoxPreference
+        		android:key="enable_notifications"
+        		android:title="@string/enable_notifications_title"
+        		android:summaryOn="@string/enable_notifications_summary_on"
+        		android:summaryOff="@string/enable_notifications_summary_off"
+        		android:defaultValue="true"/>
+        	<CheckBoxPreference
+        	    android:key="enable_intrusive_notifications"
+        	    android:title="@string/enable_intrusive_notifications"
+        	    android:summaryOn="@string/intrusive_summary_on"
+        	    android:summaryOff="@string/intrusive_summary_off"
+        		android:defaultValue="false"
+        	    android:dependency="enable_notifications" />
+        	
+        </PreferenceCategory>
+
+</PreferenceScreen>
