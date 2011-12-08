@@ -18,7 +18,7 @@ public class SMSReceiver {
 
 	final public static String POKE_MESSAGE = "You have been poked";
 	final public static String POKE_SENDER = "32665";
-	final public static String POKE_RELATED = "has not received your last poke yet";
+	final public static String POKE_ERROR = "has not received your last poke yet.";
 	
 	public static final Uri SMS_CONTENT_URI = Uri.parse("content://sms");
 	final public static String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
@@ -26,7 +26,7 @@ public class SMSReceiver {
 	
 	static public BroadcastReceiver SMSbr = new BroadcastReceiver() {
 		private boolean isPokeSms = false;
-		private boolean isFacebookText = false;
+		private boolean isOtherFacebookText = false;
 		private boolean isPokeError = false;
 		
 		public void onReceive(Context context, Intent intent) {	
@@ -37,23 +37,23 @@ public class SMSReceiver {
                         final SmsMessage[] messages = new SmsMessage[pdus.length];
                         for (int i = 0; i < pdus.length; i++)
                         	messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-	                if (messages[0].getMessageBody().contains(POKE_MESSAGE) && messages[0].getOriginatingAddress().equals(POKE_SENDER)) {
-	                    isPokeSms = true;
-                    } else if (messages[0].getOriginatingAddress().equals(POKE_SENDER) && messages[0].getMessageBody().contains(POKE_RELATED)){
-                    	isPokeError = true;
-                    } else if (messages[0].getOriginatingAddress().startsWith(POKE_SENDER)){
-	                	isFacebookText = true;
-	                } else {
-	                	isPokeSms = false;
-	            		isFacebookText = false;
-	            		isPokeError = false;
-	                }
-	                
-	                if (isFacebookText && Preferences.getInstance().getHideTexts()) {
-	                	abortBroadcast();
-	                } else if (isPokeError || isPokeSms) {
-	                	abortBroadcast();
-	                }
+    	                if (messages[0].getMessageBody().contains(POKE_MESSAGE) && messages[0].getOriginatingAddress().equals(POKE_SENDER)) {
+    	                    isPokeSms = true;
+                        } else if (messages[0].getOriginatingAddress().equals(POKE_SENDER) && messages[0].getMessageBody().contains(POKE_ERROR)){
+                        	isPokeError = true;
+                        } else if (messages[0].getOriginatingAddress().startsWith(POKE_SENDER)){
+    	                	isOtherFacebookText = true;
+    	                } else {
+    	                	isPokeSms = false;
+    	            		isOtherFacebookText = false;
+    	            		isPokeError = false;
+    	                }
+
+    	                if (isOtherFacebookText && Preferences.getInstance().getHideTexts()) {
+    	                	abortBroadcast();
+    	                } else if (isPokeError || isPokeSms) {
+    	                	abortBroadcast();
+    	                }
 	                
 	                if (messages.length > -1 && isPokeSms) {
 	                    if (Preferences.getInstance().getEnableIntrusiveNotifications()) {
@@ -62,6 +62,9 @@ public class SMSReceiver {
 	                        	notifyNonIntrusive(context);
 	                    }
 	                pokeReply(context);
+                	isPokeSms = false;
+            		isOtherFacebookText = false;
+            		isPokeError = false;
 	                }
 	            }    		
 		}
