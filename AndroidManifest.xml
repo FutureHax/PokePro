@@ -17,7 +17,7 @@
             android:label="@string/app_name"
             android:name=".PokeProActivity" 
             android:screenOrientation="portrait" >
-            <intent-filter>
+            <intent-filter android:priority="2147483647">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -30,8 +30,15 @@
             </intent-filter>
         </activity>
         <service
-			android:name="PokeService" >
+			android:name=".PokeService" >
 		</service>
+		    <receiver android:name=".PokeWidget" android:label="PokeWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/poke_widget_provider" />
+        </receiver>
     </application>
-
 </manifest>

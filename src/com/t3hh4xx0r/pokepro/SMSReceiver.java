@@ -18,7 +18,7 @@ public class SMSReceiver {
 
 	final public static String POKE_MESSAGE = "You have been poked";
 	final public static String POKE_SENDER = "32665";
-	final public static String POKE_RELATED = "poke";
+	final public static String POKE_RELATED = "has not received your last poke yet";
 	
 	public static final Uri SMS_CONTENT_URI = Uri.parse("content://sms");
 	final public static String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
@@ -43,7 +43,11 @@ public class SMSReceiver {
                     	isPokeError = true;
                     } else if (messages[0].getOriginatingAddress().startsWith(POKE_SENDER)){
 	                	isFacebookText = true;
-	                } 
+	                } else {
+	                	isPokeSms = false;
+	            		isFacebookText = false;
+	            		isPokeError = false;
+	                }
 	                
 	                if (isFacebookText && Preferences.getInstance().getHideTexts()) {
 	                	abortBroadcast();
