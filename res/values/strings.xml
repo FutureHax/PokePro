@@ -12,5 +12,8 @@
     <string name="enable_intrusive_notifications">Intrusive Notifications</string>
     <string name="intrusive_summary_on">Intrusive notifications (status bar) will be used</string>
     <string name="intrusive_summary_off">Non intrusive (toast) notifications will be used</string>
+    <string name="hide_texts_title">Hide FB texts</string>
+    <string name="hide_texts_summary_on">All incoming texts from facebook will be hidden.</string>
+    <string name="hide_texts_summary_off">All other incoming texts from facebook will be shown.</string>
 
 </resources>

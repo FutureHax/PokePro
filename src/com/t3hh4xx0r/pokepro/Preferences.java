@@ -26,6 +26,7 @@ public class Preferences {
 
     static final String ENABLE_NOTIFICATIONS = "enable_notifications";
     static final String ENABLE_INTRUSIVE_NOTIFICATIONS = "enable_intrusive_notifications";
+    static final String HIDE_TEXTS = "hide_texts";
 
     public boolean getEnableNotifications() {
         return mPreferences.getBoolean(ENABLE_NOTIFICATIONS, true);
@@ -33,4 +34,9 @@ public class Preferences {
     public boolean getEnableIntrusiveNotifications() {
     	return mPreferences.getBoolean(ENABLE_INTRUSIVE_NOTIFICATIONS, false);
     }
+    public boolean getHideTexts() {
+    	return mPreferences.getBoolean(HIDE_TEXTS, true);
+    }
+
+    public static boolean IS_SERVICE_ACTIVE = false;
 }

@@ -1,11 +1,9 @@
 package com.t3hh4xx0r.pokepro;
 
-import com.t3hh4xx0r.pokepro.SMSReceiver;
 import com.t3hh4xx0r.pokepro.Preferences;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.os.Bundle;
@@ -20,15 +18,11 @@ public class PokeProActivity extends Activity {
 	private Button mSettingsButton;
 	
 	TextView serviceState;
-	
-	static boolean serviceIsActive = false;
-	
-	@Override
+		
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Preferences.getInstance().setContext(this);
-
 
         mStartServiceButton = (Button) findViewById(R.id.startService);
         mStartServiceButton.setOnClickListener (mStartServiceListener);
@@ -39,12 +33,12 @@ public class PokeProActivity extends Activity {
         
         serviceState = (TextView) findViewById(R.id.serviceState);
 
-        if (serviceIsActive) {
+    	if (Preferences.IS_SERVICE_ACTIVE) {
         	serviceState.setText(R.string.is_active);
         } else {
         	serviceState.setText(R.string.is_not_active);
         }
-	} 
+   	} 
 
 	private OnClickListener mStartServiceListener = new OnClickListener() {
 		public void onClick(View v) {
@@ -66,18 +60,26 @@ public class PokeProActivity extends Activity {
 	};
 	
 	private void startService() {
-		serviceIsActive = true;
-    	serviceState.setText(R.string.is_active);
-		Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
+        startService(new Intent(PokeProActivity.this, PokeService.class));
 		
-		IntentFilter SMSfilter = new IntentFilter(SMSReceiver.SMS_RECEIVED);
-		this.registerReceiver(SMSReceiver.SMSbr, SMSfilter);
-	}
+    	Preferences.IS_SERVICE_ACTIVE = true;
+    	
+    	restart();
+   	}
 	
 	private void stopService() {
-		serviceIsActive = false;
-    	serviceState.setText(R.string.is_not_active);
-		Toast.makeText(this, "Service Stopped", Toast.LENGTH_SHORT).show();
-		this.unregisterReceiver(SMSReceiver.SMSbr);
+        stopService(new Intent(PokeProActivity.this, PokeService.class));
+        
+    	Preferences.IS_SERVICE_ACTIVE = false;
+       
+		Toast.makeText(this, "Service will be stopped", Toast.LENGTH_SHORT).show();
+		
+		restart();
+	}
+	
+	private void restart() {
+        finish();
+        Intent intent = new Intent(PokeProActivity.this, PokeProActivity.class);
+        startActivity(intent);
 	}
 }

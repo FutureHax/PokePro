@@ -17,7 +17,12 @@
         	    android:summaryOff="@string/intrusive_summary_off"
         		android:defaultValue="false"
         	    android:dependency="enable_notifications" />
-        	
+        	<CheckBoxPreference
+        	    android:key="hide_texts"
+        	    android:title="@string/hide_texts_title"
+        	    android:summaryOn="@string/hide_texts_summary_on"
+        	    android:summaryOff="@string/hide_texts_summary_off"
+        		android:defaultValue="true" />        	
         </PreferenceCategory>
 
 </PreferenceScreen>

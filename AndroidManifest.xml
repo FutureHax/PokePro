@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.t3hh4xx0r.pokepro"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.0.1" >
 
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     
     <uses-sdk android:minSdkVersion="7" />
 
@@ -14,8 +15,9 @@
         android:label="@string/app_name" >
         <activity
             android:label="@string/app_name"
-            android:name=".PokeProActivity" >
-            <intent-filter android:priority="2147483647">
+            android:name=".PokeProActivity" 
+            android:screenOrientation="portrait" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -27,6 +29,9 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <service
+			android:name="PokeService" >
+		</service>
     </application>
 
 </manifest>
