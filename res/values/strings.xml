@@ -15,5 +15,7 @@
     <string name="hide_texts_title">Hide FB texts</string>
     <string name="hide_texts_summary_on">All incoming texts from facebook will be hidden.</string>
     <string name="hide_texts_summary_off">All other incoming texts from facebook will be shown.</string>
+    <string name="active">Active</string>
+    <string name="not_active">Not Active</string>
 
 </resources>

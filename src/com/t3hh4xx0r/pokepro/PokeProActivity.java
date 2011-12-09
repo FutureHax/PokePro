@@ -59,7 +59,7 @@ public class PokeProActivity extends Activity {
 			}
 	};
 	
-	private void startService() {
+	public void startService() {
         startService(new Intent(PokeProActivity.this, PokeService.class));
 		
     	Preferences.IS_SERVICE_ACTIVE = true;
@@ -67,7 +67,7 @@ public class PokeProActivity extends Activity {
     	restart();
    	}
 	
-	private void stopService() {
+	public void stopService() {
         stopService(new Intent(PokeProActivity.this, PokeService.class));
         
     	Preferences.IS_SERVICE_ACTIVE = false;
@@ -81,5 +81,6 @@ public class PokeProActivity extends Activity {
         finish();
         Intent intent = new Intent(PokeProActivity.this, PokeProActivity.class);
         startActivity(intent);
+        PokeWidget.updateWidget(getBaseContext());
 	}
 }
